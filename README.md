@@ -21,14 +21,14 @@ Project 1 - Flocking**
 ### Performance Analysis 
 #### Boids Count Impact on Performance
 
-![]()
-![]()
+![](https://github.com/uluyek/Project1-CUDA-Flocking/blob/main/Numbers%20of%20Boids%20VS.%20FPS.png)
+![](https://github.com/uluyek/Project1-CUDA-Flocking/blob/main/Numbers%20of%20Boids%20VS.%20FPS%20(with%20Visualization).png)
 
 **Naive:** Performance drops sharply as boid count increases due to O(N^2) complexity.
 **Uniform Grid:** Less severe performance drop with more boids due to reduced comparisons.
-**Coherent Grid:** Similar to uniform grid but maintains better performance due to optimized memory access.
+**Coherent Grid:** Similar to the uniform grid but maintains better performance due to optimized memory access.
 
-![]()
+![](https://github.com/uluyek/Project1-CUDA-Flocking/blob/main/Framerate%20Change%20with%20Increasing%20Block%20Size.png)
 
 #### Block Size and Block Count Effects
 Increasing block size generally improves performance until a threshold, after which there are diminishing returns. This is consistent across all implementations and is likely due to the limits of GPU thread management and optimal thread occupancy.
@@ -55,4 +55,4 @@ kernUpdateVelocityBruteForce <<< fullBlocksPerGrid, blockSize >>> (N, dev_pos, d
 This section of the code utilizes the preprocessor directive USE_SHARED_MEM to switch between using shared memory (kernUpdateVelocityBruteForceShared) and not using it (kernUpdateVelocityBruteForce).
 #### Performance Analysis
 As demonstrated, the use of shared memory has a significant impact on the frames per second (FPS) achieved by the simulation under the naive setting:
-![]()
+![](https://github.com/uluyek/Project1-CUDA-Flocking/blob/main/FPS%20for%20Naive%20Implementation%20with%20Shared%20Memory%20On_Off.png)
