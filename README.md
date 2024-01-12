@@ -30,13 +30,19 @@ Project 1 - Flocking**
 
 **Coherent Grid:** Similar to the uniform grid but maintains better performance due to optimized memory access.
 
+#### Block Size and Block Count Effects
+
 ![](https://github.com/uluyek/Project1-CUDA-Flocking/blob/main/Framerate%20Change%20with%20Increasing%20Block%20Size.png)
 
-#### Block Size and Block Count Effects
 Increasing block size generally improves performance until a threshold, after which there are diminishing returns. This is consistent across all implementations and is likely due to the limits of GPU thread management and optimal thread occupancy.
 
 #### Cell Width and Neighbor Checking
-**27 vs. 8 Neighboring Cells:** 
+
+![](https://github.com/uluyek/Project1-CUDA-Flocking/blob/main/FPS%20for%208%20Cell%20Vs.%2027%20Cell.png)
+
+The 8-cell neighbor search outperforms the 27-cell approach as it aligns better with the localized interaction range of boids, avoiding unnecessary computations for distant cells that do not impact the immediate behavior of the boids, leading to improved performance.
+
+
 
 ### Extra Credit: Shared-Memory Optimization
 
