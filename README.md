@@ -25,7 +25,9 @@ Project 1 - Flocking**
 ![](https://github.com/uluyek/Project1-CUDA-Flocking/blob/main/Numbers%20of%20Boids%20VS.%20FPS%20(with%20Visualization).png)
 
 **Naive:** Performance drops sharply as boid count increases due to O(N^2) complexity.
+
 **Uniform Grid:** Less severe performance drop with more boids due to reduced comparisons.
+
 **Coherent Grid:** Similar to the uniform grid but maintains better performance due to optimized memory access.
 
 ![](https://github.com/uluyek/Project1-CUDA-Flocking/blob/main/Framerate%20Change%20with%20Increasing%20Block%20Size.png)
@@ -36,9 +38,9 @@ Increasing block size generally improves performance until a threshold, after wh
 #### Cell Width and Neighbor Checking
 **27 vs. 8 Neighboring Cells:** 
 
-## Extra Credit: Shared-Memory Optimization
+### Extra Credit: Shared-Memory Optimization
 
-### Implementation
+#### Implementation
 
 For the extra credit, I implemented a shared-memory optimization to enhance the nearest neighbor search within the naive approach of the boid simulation. The naive approach's performance was improved by using shared memory for the computations involved in updating boid velocities.
 
