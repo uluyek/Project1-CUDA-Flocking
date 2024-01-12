@@ -17,3 +17,42 @@ Project 1 - Flocking**
 | Flocking Scene: N_FOR_VIS = 5000,000, scene_scale=500.0f, DT = 0.5f | 
 |---------------|
 | ![](https://github.com/uluyek/Project1-CUDA-Flocking/blob/main/5m%20500%200.5.gif) | 
+
+### Performance Analysis 
+#### Boids Count Impact on Performance
+
+![]()
+![]()
+
+**Naive:** Performance drops sharply as boid count increases due to O(N^2) complexity.
+**Uniform Grid:** Less severe performance drop with more boids due to reduced comparisons.
+**Coherent Grid:** Similar to uniform grid but maintains better performance due to optimized memory access.
+
+![]()
+
+#### Block Size and Block Count Effects
+Increasing block size generally improves performance until a threshold, after which there are diminishing returns. This is consistent across all implementations and is likely due to the limits of GPU thread management and optimal thread occupancy.
+
+#### Cell Width and Neighbor Checking
+**27 vs. 8 Neighboring Cells:** 
+
+## Extra Credit: Shared-Memory Optimization
+
+### Implementation
+
+For the extra credit, I implemented a shared-memory optimization to enhance the nearest neighbor search within the naive approach of the boid simulation. The naive approach's performance was improved by using shared memory for the computations involved in updating boid velocities.
+
+The implementation conditional can be observed in the following snippet:
+
+```cpp
+#if USE_SHARED_MEM
+kernUpdateVelocityBruteForceShared <<< fullBlocksPerGrid, blockSize, sizeof(glm::vec3) * blockSize * 2 >>> (N, dev_pos, dev_vel1, dev_vel2);
+#else
+kernUpdateVelocityBruteForce <<< fullBlocksPerGrid, blockSize >>> (N, dev_pos, dev_vel1, dev_vel2);
+#endif
+```
+
+This section of the code utilizes the preprocessor directive USE_SHARED_MEM to switch between using shared memory (kernUpdateVelocityBruteForceShared) and not using it (kernUpdateVelocityBruteForce).
+#### Performance Analysis
+As demonstrated, the use of shared memory has a significant impact on the frames per second (FPS) achieved by the simulation under the naive setting:
+![]()
